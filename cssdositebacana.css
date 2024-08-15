@@ -1,6 +1,40 @@
-.nav{
-    align-items: center;
+#arealogo{
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    margin-left: 2%;
+}
+.logotxt{
+    font-size: x-large;
 }
 .imglogo{
     height: 100%;
+}
+#contentgaleria{
+    margin: 1%;
+    border-radius: 2%;
+    padding-left: 1%;
+    padding-right: 1%;
+
+}
+#titulogaleria p{
+    font-size: 60px;
+    color: black;
+    text-align: center;
+}
+#galeria{
+display: flex;
+flex-wrap: wrap;
+justify-content: space-around;
+}
+.imggaleria{
+    height: 40vh;
+}
+#areaformulario{
+    align-items: center;
+
+}
+#formulario{
+    margin: 0 auto;
+    display: flex;
 }

@@ -8,6 +8,16 @@
         <link rel="stylesheet" href="cssdositebacana.css">
         <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 
+        <style>
+        canvas {
+            border: 1px solid black;
+            cursor: crosshair;
+        }
+        #download {
+            margin-top: 10px;
+        }
+        </style>
+
 </head>
 <body style="background-color: #282f32; color: white;">
  <!--navegador-->
@@ -28,45 +38,11 @@
       
   </nav>
 
-  <!--areaformulario-->
-  <fieldset id="areaformulario">
-    <div id="formulario" class="row">
-        <form  class="col s10">
-            <div class="row"><h2>Contate-nos</h2>
-            </div>
-          <div class="row">
-            <div class="input-field col s5">
-              <input id="primeironome" type="text" class="validate" required>
-              <label for="first_name">Primeiro nome</label>
-            </div>
-            <div class="input-field col s5">
-              <input id="segundonome" type="text" class="validate" required>
-              <label for="last_name">Segundo nome</label>
-            </div>
-          </div>
-          <div class="row">
-            <div class="input-field col s10">
-              <input id="telefone" type="number" class="validate" required>
-              <label for="password">telefone</label>
-            </div>
-          </div>
-          <div class="row">
-            <div class="input-field col s10">
-              <input id="email" type="email" class="validate" required>
-              <label for="email">Email</label>
-            </div>
-          </div>
-          <div class="row">
-            <div class="input-field col s10">
-              <input id="enviar" type="submit" class="validate" onclick="validandoform()">
-            </div>
-          </div>
-          
-        </form>
-      </div>
-
-     
-  </fieldset>
+  <div class="card" style="width: max-content;">
+    <canvas id="desenhoCanvas" width="500" height="400"></canvas>
+    <br>
+    <button id="download">Baixar Desenho</button>
+  </div>
 
   <!--rodape-->
 
@@ -104,8 +80,45 @@
     </div>
 
   </footer>
-    
+  
+  <script>
+    const canvas = document.getElementById('desenhoCanvas');
+const ctx = canvas.getContext('2d');
+let desenhando = false;
+
+canvas.addEventListener('mousedown', () => {
+   desenhando = true;
+   ctx.beginPath();
+});
+
+canvas.addEventListener('mouseup', () => {
+   desenhando = false;
+});
+
+canvas.addEventListener('mousemove', desenhar);
+
+function desenhar(event) {
+   if (!desenhando) return;
+
+   ctx.lineWidth = 5;
+   ctx.lineCap = 'round';
+   ctx.strokeStyle = 'black';
+
+   ctx.lineTo(event.clientX - canvas.offsetLeft, event.clientY - canvas.offsetTop);
+   ctx.stroke();
+   ctx.beginPath();
+   ctx.moveTo(event.clientX - canvas.offsetLeft, event.clientY - canvas.offsetTop);
+}
+
+document.getElementById('download').addEventListener('click', () => {
+   const link = document.createElement('a');
+   link.download = 'desenho.png';
+   link.href = canvas.toDataURL();
+   link.click();
+});
+ </script>
   <script src="materialize/js/materialize.js"></script>
+  
       
 </body>
 </html>
